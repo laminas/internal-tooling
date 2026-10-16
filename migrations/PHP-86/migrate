@@ -27,7 +27,7 @@ $project = ProjectInformation::fromDirectory($rootDirectory);
 // Patch Composer
 $composer = new ComposerFile($project->composerFile);
 $composer->setPlatform('8.3.99');
-$composer->setPhpVersionConstraint('~8.3 || ~8.4 || ~8.5 || ~8.6');
+$composer->setPhpVersionConstraint('~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0');
 $composer->write();
 
 // Enable BC Checker and Ignore Platform Reqs on 8.6
@@ -92,7 +92,7 @@ if (is_dir($toolsDirectory) && file_exists($toolsDirectory)) {
 
         $composer = new ComposerFile($file);
         $composer->setPlatform('8.3.99');
-        $composer->setPhpVersionConstraint('~8.3 || ~8.4 || ~8.5 || ~8.6');
+        $composer->setPhpVersionConstraint('~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0');
         $composer->write();
     }
 }
