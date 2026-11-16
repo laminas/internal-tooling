@@ -9,6 +9,8 @@ workflows:
     '.github/workflows/continuous-integration.yml':
         - 'laminas/laminas-ci-matrix-action@1.36.0'
         - 'laminas/laminas-continuous-integration-action@1.48.0'
+    '.github/workflows/verify-github-actions-lockfile.yml':
+        - 'actions/checkout@v7.0.1'
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'

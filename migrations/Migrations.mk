@@ -8,3 +8,4 @@ include $(_MAKEFILE_DIR)migrations/InstallRequireChecker/Install.mk
 include $(_MAKEFILE_DIR)migrations/InstallComposerUnused/Install.mk
 include $(_MAKEFILE_DIR)migrations/InstallStructArmed/Install.mk
 include $(_MAKEFILE_DIR)migrations/AddIniFile/Migrate.mk
+include $(_MAKEFILE_DIR)migrations/VerifyLockedGitHubActionsWorkflow/Migrate.mk
