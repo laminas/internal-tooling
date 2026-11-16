@@ -5,19 +5,18 @@ ifneq ($(strip $(shell which gh)),"")
     HAS_GH_CLI_INSTALLED := "TRUE"
 endif
 
-HAS_GH_CLI_INSTALLED := "FALSE"
-
 ifeq ($(HAS_GH_CLI_INSTALLED),"FALSE")
 HELP += $(call MK_ADVICE,'GitHub CLI not installed','Additional commands are available if you have the GitHub cli installed locally')
 endif
 
+# Determine whether the user's local `gh` tool is logged in to GitHub
 IS_LOGGED_INTO_GITHUB := "FALSE"
 ifeq ($(HAS_GH_CLI_INSTALLED),"TRUE")
     _TMP := $(strip $(shell gh auth status --json hosts --jq '.hosts["github.com"][0].active'))
     ifeq ($(_TMP),true)
         IS_LOGGED_INTO_GITHUB := "TRUE"
     endif
-endif
+endif # HAS_GH_CLI_INSTALLED
 
 ifeq ($(HAS_GH_CLI_INSTALLED),"TRUE")
 
@@ -52,7 +51,7 @@ github-lockfile-plugin: _install-gh-lockfile-plugin
 #
 # Run gh actions-lock
 #
-HELP += $(call MK_HELP,'gha-lock','Lock GitHub Actions workflow dependencies (Requires local installation of `gh`)')
+HELP += $(call MK_HELP,'gha-lock','Lock GitHub Actions workflow dependencies')
 gha-lock: github-lockfile-plugin
 	gh actions-lock
 .PHONY: gha-lock
@@ -60,8 +59,9 @@ gha-lock: github-lockfile-plugin
 #
 # Run gh actions-lock --relock
 #
-HELP += $(call MK_HELP,'gha-relock','Re-Lock GitHub Actions workflow dependencies (Requires local installation of `gh`)')
+HELP += $(call MK_HELP,'gha-relock','Re-Lock GitHub Actions workflow dependencies')
 gha-relock: github-lockfile-plugin
 	gh actions-lock --relock
 .PHONY: gha-relock
-endif
+
+endif # HAS_GH_CLI_INSTALLED
